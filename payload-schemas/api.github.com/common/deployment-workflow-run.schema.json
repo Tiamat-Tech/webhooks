@@ -28,6 +28,8 @@
   "properties": {
     "id": { "type": "integer" },
     "name": { "type": "string" },
+    "path": { "type": "string" },
+    "display_title": { "type": "string" },
     "node_id": { "type": "string" },
     "head_branch": { "type": "string" },
     "head_sha": { "type": "string" },
@@ -64,7 +66,11 @@
     "actor": { "$ref": "user.schema.json" },
     "triggering_actor": { "$ref": "user.schema.json" },
     "run_attempt": { "type": "integer" },
-    "run_started_at": { "type": "string", "format": "date-time" }
+    "run_started_at": { "type": "string", "format": "date-time" },
+    "referenced_workflows": {
+      "type": "array",
+      "items": { "$ref": "referenced-workflow.schema.json" }
+    }
   },
   "additionalProperties": false,
   "title": "Deployment Workflow Run"

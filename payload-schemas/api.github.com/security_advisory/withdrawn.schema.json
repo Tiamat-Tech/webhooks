@@ -12,6 +12,7 @@
         "cvss",
         "cwes",
         "ghsa_id",
+        "cve_id",
         "summary",
         "description",
         "severity",
@@ -45,6 +46,7 @@
           }
         },
         "ghsa_id": { "type": "string" },
+        "cve_id": { "type": ["string", "null"] },
         "summary": { "type": "string" },
         "description": { "type": "string" },
         "severity": { "type": "string" },
@@ -69,9 +71,9 @@
             "additionalProperties": false
           }
         },
-        "published_at": { "type": "string" },
-        "updated_at": { "type": "string" },
-        "withdrawn_at": { "type": "string" },
+        "published_at": { "type": "string", "format": "date-time" },
+        "updated_at": { "type": "string", "format": "date-time" },
+        "withdrawn_at": { "type": "string", "format": "date-time" },
         "vulnerabilities": {
           "type": "array",
           "items": {

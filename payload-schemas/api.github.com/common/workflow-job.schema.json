@@ -21,7 +21,8 @@
     "runner_id",
     "runner_name",
     "runner_group_id",
-    "runner_group_name"
+    "runner_group_name",
+    "workflow_name"
   ],
   "description": "The workflow job. Many `workflow_job` keys, such as `head_sha`, `conclusion`, and `started_at` are the same as those in a [`check_run`](#check_run) object.",
   "type": "object",
@@ -43,12 +44,11 @@
     },
     "steps": {
       "type": "array",
-      "items": { "$ref": "workflow-step.schema.json" },
-      "minItems": 1
+      "items": { "$ref": "workflow-step.schema.json" }
     },
     "conclusion": {
       "type": ["string", "null"],
-      "enum": ["success", "failure", null]
+      "enum": ["success", "failure", "cancelled", "skipped", null]
     },
     "labels": {
       "type": "array",
@@ -71,8 +71,11 @@
       "type": ["string", "null"],
       "description": "The name of the runner group that is running this job. This will be `null` as long as `workflow_job[status]` is `queued`."
     },
-    "started_at": { "type": "string" },
-    "completed_at": { "type": ["string", "null"] }
+    "started_at": { "type": "string", "format": "date-time" },
+    "completed_at": {
+      "oneOf": [{ "type": "string", "format": "date-time" }, { "type": "null" }]
+    },
+    "workflow_name": { "type": "string" }
   },
   "additionalProperties": false,
   "title": "Workflow Job"
